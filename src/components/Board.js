@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BOARD_WIDTH, BLOCK_COLORS } from "../consts";
+import {checkForColOfThree, checkForRowOfThree} from '../helpers/gameLogic'
 import { buildBoard } from "../helpers/buildBoard";
 
 const Board = () => {
-  const [board, setBoard] = useState(buildBoard(BLOCK_COLORS, BOARD_WIDTH))
+  const [gameBoard, setGameBoard] = useState(buildBoard(BLOCK_COLORS, BOARD_WIDTH))
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      let board = checkForColOfThree(gameBoard);
+      setGameBoard(prev => ({...prev, board}))
+    }, 100)
+    return () => clearInterval(timer)
+  },[gameBoard])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      let board = checkForRowOfThree(gameBoard);
+      setGameBoard(prev => ({...prev, board}))
+    }, 100)
+    return () => clearInterval(timer)
+  },[gameBoard])
 
   return (
   <div className='board'>
-    {board.map(piece => <div style={{backgroundColor: piece}}></div>)}
+    {gameBoard.board.map((square, ind) => <div key={ind} style={{backgroundColor: square}}></div>)}
   </div>
   )
 }
