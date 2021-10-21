@@ -9,7 +9,7 @@ export const checkForColOfThree = (gameBoard) => {
       colOfThree.forEach(square => updatedBoard[square] = "")
     }
   }
-  return updatedBoard;
+  return {size, board: updatedBoard};
 }
 
 const isValidCol = (boardSize, currInd) => {
@@ -28,5 +28,19 @@ export const checkForRowOfThree = (gameBoard) => {
       rowOfThree.forEach(square => updatedBoard[square] = "")
     }
   }
-  return updatedBoard;
+  return {size, board: updatedBoard};
+}
+
+
+export const moveSquareDown = (gameBoard) => {
+  const {size, board} = gameBoard;
+  const updatedBoard = [...board]
+  for(let i = 0; i < size ** 2 - size; i++ ){
+    if(updatedBoard[i + size] === ''){
+      updatedBoard[i + size] = updatedBoard[i]
+      updatedBoard[i] = "";
+    }
+  }
+
+  return {size, board: updatedBoard};
 }

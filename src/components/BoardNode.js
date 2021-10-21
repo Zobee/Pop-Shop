@@ -1,9 +1,5 @@
-const BoardNode = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+const BoardNode = ({square}) => {
+  return <div style={{backgroundColor: square}}></div>
 }
 
 export default BoardNode
