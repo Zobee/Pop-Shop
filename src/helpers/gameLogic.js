@@ -71,11 +71,31 @@ export const dragEnd = (e, activeCell, replacedCell, setGameBoard) => {
 
 const swapCells = (activeCell, replacedCell, setGameBoard) => {
   setGameBoard(prev => {
-    const {board} = prev;
+    const {board, size} = prev;
+    const activeCellInd = activeCell.dataset.ind;
+    const replacedCellInd = replacedCell.dataset.ind;
     const updatedBoard = [...board];
-    const temp = updatedBoard[activeCell.dataset.ind]
-    updatedBoard[activeCell.dataset.ind] = updatedBoard[replacedCell.dataset.ind]
-    updatedBoard[replacedCell.dataset.ind] = temp
+
+    if(isValidMove(size, +activeCellInd, +replacedCellInd)){
+      const temp = updatedBoard[activeCellInd]
+      updatedBoard[activeCellInd] = updatedBoard[replacedCellInd]
+      updatedBoard[replacedCellInd] = temp
+    }
+
     return {...prev, board: updatedBoard}
   })
 }
+
+const isValidMove = (boardSize, activeCellInd, replacedCellInd) => {
+  //Confirm cell Inds are valid
+  if(!isValidCellInd(boardSize, activeCellInd) || !isValidCellInd(boardSize, replacedCellInd)) return false;
+
+  //To-Do: Fix edge-case where adjacent cells on separate rows can't swap
+
+  return (activeCellInd === replacedCellInd - 1) || 
+         (activeCellInd === replacedCellInd - boardSize) ||
+         (activeCellInd === replacedCellInd + 1) ||
+         (activeCellInd === replacedCellInd + boardSize)
+}
+
+const isValidCellInd = (boardSize, cellInd) => cellInd >= 0 && cellInd < boardSize ** 2;
