@@ -1,7 +1,7 @@
 import {BLOCK_COLORS} from '../consts'
 import {getRandArrValue} from './buildBoard'
 
-export const checkForColOfThree = (gameBoard) => {
+const checkForColOfThree = (gameBoard) => {
   const {size, board} = gameBoard
   const updatedBoard = [...board];
   const lastColStartInd = (size ** 2) - (size * 2 + 1);
@@ -19,7 +19,7 @@ const isValidCol = (boardSize, currInd) => {
   return currInd % boardSize !== boardSize - 2 && currInd % boardSize !== boardSize - 1;
 }
 
-export const checkForRowOfThree = (gameBoard) => {
+const checkForRowOfThree = (gameBoard) => {
   const {size, board} = gameBoard
   const updatedBoard = [...board];
   const lastRowStartInd = (size ** 2) - 4;
@@ -36,7 +36,7 @@ export const checkForRowOfThree = (gameBoard) => {
 
 const replenishTopCell = (updatedBoard, currInd) => updatedBoard[currInd] = getRandArrValue(BLOCK_COLORS);
 
-export const moveCellDown = (gameBoard) => {
+const moveCellDown = (gameBoard) => {
   const {size, board} = gameBoard;
   const updatedBoard = [...board]
 
@@ -55,6 +55,13 @@ export const moveCellDown = (gameBoard) => {
   }
 
   return {size, board: updatedBoard};
+}
+
+export const updateBoard = (gameBoard) => {
+  let board = checkForColOfThree(gameBoard);
+  board = checkForRowOfThree(board)
+  board = moveCellDown(board)
+  return board;
 }
 
 export const dragStart = (e, setActiveCell) => {

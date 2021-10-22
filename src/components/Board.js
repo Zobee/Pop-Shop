@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import BoardNode from './BoardNode'
 import { BOARD_WIDTH, BLOCK_COLORS } from "../consts";
-import {checkForColOfThree, checkForRowOfThree, moveCellDown, dragStart, dragDrop, dragEnd} from '../helpers/gameLogic'
+import {updateBoard, dragStart, dragDrop, dragEnd} from '../helpers/gameLogic'
 import { buildBoard } from "../helpers/buildBoard";
 
 const Board = ({setScore}) => {
@@ -11,9 +11,7 @@ const Board = ({setScore}) => {
 
   useEffect(() => {
     const gameTimer = setInterval(() => {
-      let board = checkForColOfThree(gameBoard);
-      board = checkForRowOfThree(board)
-      board = moveCellDown(board)
+      let board = updateBoard(gameBoard)
       setGameBoard(board)
     }, 100)
     return () => clearInterval(gameTimer)
