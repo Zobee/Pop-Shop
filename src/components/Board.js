@@ -20,7 +20,7 @@ const Board = () => {
 
   return (
   <div className='board'>
-    {gameBoard.board.map((square, ind) => <BoardNode square={square}/> )}
+    {gameBoard.board.map((square, ind) => <BoardNode key={ind} index={ind} square={square}/> )}
   </div>
   )
 }

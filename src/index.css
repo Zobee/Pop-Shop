@@ -19,4 +19,5 @@
 .board div{
   width: 80px;
   height: 80px;
+  cursor: pointer;
 }

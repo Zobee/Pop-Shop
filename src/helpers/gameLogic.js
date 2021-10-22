@@ -34,16 +34,17 @@ export const checkForRowOfThree = (gameBoard) => {
   return {size, board: updatedBoard};
 }
 
+const replenishTopCell = (updatedBoard, currInd) => updatedBoard[currInd] = getRandArrValue(BLOCK_COLORS);
 
 export const moveSquareDown = (gameBoard) => {
   const {size, board} = gameBoard;
   const updatedBoard = [...board]
 
   for(let i = 0; i < size ** 2 - size; i++){
-    
+
     //Add new random cell if top cell is empty
     if(updatedBoard[i] === '' && i < size){
-      updatedBoard[i] = getRandArrValue(BLOCK_COLORS);
+      replenishTopCell(updatedBoard, i)
     }
     
     //Move current cell down if cell below is empty
@@ -54,4 +55,16 @@ export const moveSquareDown = (gameBoard) => {
   }
 
   return {size, board: updatedBoard};
+}
+
+export const dragStart = (e) => {
+  console.log(e.target.dataset.id);
+}
+
+export const dragDrop = (e) => {
+  console.log("");
+}
+
+export const dragEnd = (e) => {
+  console.log("");
 }
