@@ -1,18 +1,23 @@
-import {dragStart, dragDrop, dragEnd } from "../helpers/gameLogic"
-const BoardNode = ({index, square}) => {
+const BoardNode = ({
+  index, 
+  cell, 
+  setGameBoard, 
+  activeCell, 
+  setActiveCell, 
+  dragStart, 
+  dragDrop, 
+  dragEnd}) => {
   return <div 
-    style={{backgroundColor: square}}
+    style={{backgroundColor: cell}}
     data-id={index}
     draggable={true}
-    onDragStart={dragStart}
+    onDragStart={(e) => dragStart(e, setActiveCell)}
     onDragOver={e => e.preventDefault()}
     onDragEnter={e => e.preventDefault()}
     onDragLeave={e => e.preventDefault()}
     onDrop={dragDrop}
-    onDragEnd={dragEnd}
-  >
-
-  </div>
+    onDragEnd={(e) => dragEnd(e, activeCell, setGameBoard)}
+  ></div>
 }
 
 export default BoardNode

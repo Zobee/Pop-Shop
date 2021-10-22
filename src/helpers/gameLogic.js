@@ -8,8 +8,8 @@ export const checkForColOfThree = (gameBoard) => {
 
   for(let i = 0; i < lastColStartInd; i++){
     let colOfThree = [i, i + size, i + size * 2];
-    if(colOfThree.every(square => updatedBoard[i] === updatedBoard[square])){
-      colOfThree.forEach(square => updatedBoard[square] = "")
+    if(colOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
+      colOfThree.forEach(cell => updatedBoard[cell] = "")
     }
   }
   return {size, board: updatedBoard};
@@ -27,8 +27,8 @@ export const checkForRowOfThree = (gameBoard) => {
   for(let i = 0; i < lastRowStartInd; i++){
     let rowOfThree = [i, i + 1, i + 2];
     if (!isValidCol(size, i)) continue;
-    if(rowOfThree.every(square => updatedBoard[i] === updatedBoard[square])){
-      rowOfThree.forEach(square => updatedBoard[square] = "")
+    if(rowOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
+      rowOfThree.forEach(cell => updatedBoard[cell] = "")
     }
   }
   return {size, board: updatedBoard};
@@ -36,7 +36,7 @@ export const checkForRowOfThree = (gameBoard) => {
 
 const replenishTopCell = (updatedBoard, currInd) => updatedBoard[currInd] = getRandArrValue(BLOCK_COLORS);
 
-export const moveSquareDown = (gameBoard) => {
+export const moveCellDown = (gameBoard) => {
   const {size, board} = gameBoard;
   const updatedBoard = [...board]
 
@@ -57,14 +57,16 @@ export const moveSquareDown = (gameBoard) => {
   return {size, board: updatedBoard};
 }
 
-export const dragStart = (e) => {
-  console.log(e.target.dataset.id);
+export const dragStart = (e, setActiveCell) => {
+  console.log("start", e.target.dataset.id);
+  setActiveCell(e.target)
 }
 
 export const dragDrop = (e) => {
-  console.log("");
+  console.log("drop", e.target.dataset.id);
 }
 
-export const dragEnd = (e) => {
-  console.log("");
+export const dragEnd = (e, activeCell) => {
+  console.log("end", e.target.dataset.id);
+  console.log(activeCell)
 }
