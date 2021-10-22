@@ -29,6 +29,8 @@ const Board = () => {
       cell={cell}
       activeCell={activeCell}
       setActiveCell={setActiveCell}
+      replacedCell={replacedCell}
+      setReplacedCell={setReplacedCell}
       setGameBoard={setGameBoard}
       dragStart={dragStart} 
       dragDrop={dragDrop} 

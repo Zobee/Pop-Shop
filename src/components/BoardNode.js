@@ -4,19 +4,21 @@ const BoardNode = ({
   setGameBoard, 
   activeCell, 
   setActiveCell, 
+  replacedCell,
+  setReplacedCell,
   dragStart, 
   dragDrop, 
   dragEnd}) => {
   return <div 
     style={{backgroundColor: cell}}
-    data-id={index}
+    data-ind={index}
     draggable={true}
-    onDragStart={(e) => dragStart(e, setActiveCell)}
+    onDragStart={e => dragStart(e, setActiveCell)}
     onDragOver={e => e.preventDefault()}
     onDragEnter={e => e.preventDefault()}
     onDragLeave={e => e.preventDefault()}
-    onDrop={dragDrop}
-    onDragEnd={(e) => dragEnd(e, activeCell, setGameBoard)}
+    onDrop={e => dragDrop(e, setReplacedCell)}
+    onDragEnd={e => dragEnd(e, activeCell, replacedCell, setGameBoard)}
   ></div>
 }
 

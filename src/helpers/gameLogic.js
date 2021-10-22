@@ -58,15 +58,24 @@ export const moveCellDown = (gameBoard) => {
 }
 
 export const dragStart = (e, setActiveCell) => {
-  console.log("start", e.target.dataset.id);
   setActiveCell(e.target)
 }
 
-export const dragDrop = (e) => {
-  console.log("drop", e.target.dataset.id);
+export const dragDrop = (e, setReplacedCell) => {
+  setReplacedCell(e.target)
 }
 
-export const dragEnd = (e, activeCell) => {
-  console.log("end", e.target.dataset.id);
-  console.log(activeCell)
+export const dragEnd = (e, activeCell, replacedCell, setGameBoard) => {
+  swapCells(activeCell, replacedCell, setGameBoard)
+}
+
+const swapCells = (activeCell, replacedCell, setGameBoard) => {
+  setGameBoard(prev => {
+    const {board} = prev;
+    const updatedBoard = [...board];
+    const temp = updatedBoard[activeCell.dataset.ind]
+    updatedBoard[activeCell.dataset.ind] = updatedBoard[replacedCell.dataset.ind]
+    updatedBoard[replacedCell.dataset.ind] = temp
+    return {...prev, board: updatedBoard}
+  })
 }
