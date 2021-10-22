@@ -65,7 +65,7 @@ export const dragDrop = (e, setReplacedCell) => {
   setReplacedCell(e.target)
 }
 
-export const dragEnd = (e, activeCell, replacedCell, setGameBoard) => {
+export const dragEnd = (activeCell, replacedCell, setGameBoard) => {
   swapCells(activeCell, replacedCell, setGameBoard)
 }
 
@@ -87,15 +87,12 @@ const swapCells = (activeCell, replacedCell, setGameBoard) => {
 }
 
 const isValidMove = (boardSize, activeCellInd, replacedCellInd) => {
-  //Confirm cell Inds are valid
-  if(!isValidCellInd(boardSize, activeCellInd) || !isValidCellInd(boardSize, replacedCellInd)) return false;
 
-  //To-Do: Fix edge-case where adjacent cells on separate rows can't swap
-
-  return (activeCellInd === replacedCellInd - 1) || 
+  return (isValidCellInd(boardSize, activeCellInd) && isValidCellInd(boardSize, replacedCellInd)) &&
+         (activeCellInd === replacedCellInd - 1 && replacedCellInd % boardSize !== 0) ||
          (activeCellInd === replacedCellInd - boardSize) ||
-         (activeCellInd === replacedCellInd + 1) ||
-         (activeCellInd === replacedCellInd + boardSize)
+         (activeCellInd === replacedCellInd + 1 && replacedCellInd % boardSize !== boardSize -1) ||
+         (activeCellInd === replacedCellInd + boardSize) 
 }
 
 const isValidCellInd = (boardSize, cellInd) => cellInd >= 0 && cellInd < boardSize ** 2;

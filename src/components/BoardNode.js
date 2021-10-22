@@ -18,7 +18,7 @@ const BoardNode = ({
     onDragEnter={e => e.preventDefault()}
     onDragLeave={e => e.preventDefault()}
     onDrop={e => dragDrop(e, setReplacedCell)}
-    onDragEnd={e => dragEnd(e, activeCell, replacedCell, setGameBoard)}
+    onDragEnd={() => dragEnd(activeCell, replacedCell, setGameBoard)}
   ></div>
 }
 

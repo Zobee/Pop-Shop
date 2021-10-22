@@ -4,7 +4,7 @@ import { BOARD_WIDTH, BLOCK_COLORS } from "../consts";
 import {checkForColOfThree, checkForRowOfThree, moveCellDown, dragStart, dragDrop, dragEnd} from '../helpers/gameLogic'
 import { buildBoard } from "../helpers/buildBoard";
 
-const Board = () => {
+const Board = ({setScore}) => {
   const [gameBoard, setGameBoard] = useState(buildBoard(BLOCK_COLORS, BOARD_WIDTH))
   const [activeCell, setActiveCell] = useState(null)
   const [replacedCell, setReplacedCell] = useState(null)
