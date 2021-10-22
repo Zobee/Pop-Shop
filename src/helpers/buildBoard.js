@@ -1,4 +1,4 @@
-const getRandArrValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+export const getRandArrValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 export const buildBoard = (arr, boardSize) => {
   const gameBoard = {board: [], size: boardSize};

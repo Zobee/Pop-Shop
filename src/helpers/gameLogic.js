@@ -1,3 +1,6 @@
+import {BLOCK_COLORS} from '../consts'
+import {getRandArrValue} from './buildBoard'
+
 export const checkForColOfThree = (gameBoard) => {
   const {size, board} = gameBoard
   const updatedBoard = [...board];
@@ -35,7 +38,15 @@ export const checkForRowOfThree = (gameBoard) => {
 export const moveSquareDown = (gameBoard) => {
   const {size, board} = gameBoard;
   const updatedBoard = [...board]
-  for(let i = 0; i < size ** 2 - size; i++ ){
+
+  for(let i = 0; i < size ** 2 - size; i++){
+    
+    //Add new random cell if top cell is empty
+    if(updatedBoard[i] === '' && i < size){
+      updatedBoard[i] = getRandArrValue(BLOCK_COLORS);
+    }
+    
+    //Move current cell down if cell below is empty
     if(updatedBoard[i + size] === ''){
       updatedBoard[i + size] = updatedBoard[i]
       updatedBoard[i] = "";
