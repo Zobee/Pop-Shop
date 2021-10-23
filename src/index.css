@@ -24,3 +24,7 @@
   height: 80px;
   cursor: pointer;
 }
+
+.armed{
+  border-radius: 50%;
+}

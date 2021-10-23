@@ -8,9 +8,11 @@ const BoardNode = ({
   setReplacedCell,
   dragStart, 
   dragDrop, 
-  dragEnd}) => {
+  dragEnd
+}) => {
   return <div 
-    style={{backgroundColor: cell}}
+    style={{backgroundColor: cell.color}}
+    className={cell.armed ? "armed" : ""}
     data-ind={index}
     draggable={true}
     onDragStart={e => dragStart(e, setActiveCell)}

@@ -1,5 +1,5 @@
 import {BLOCK_COLORS, BASE_SCORE} from '../consts'
-import {getRandArrValue} from './buildBoard'
+import {getRandArrValue, armCell} from './buildBoard'
 
 const checkForColOfThree = (gameBoard, setScore) => {
   const {size, board} = gameBoard
@@ -9,8 +9,12 @@ const checkForColOfThree = (gameBoard, setScore) => {
 
   for(let i = 0; i < lastColStartInd; i++){
     let colOfThree = [i, i + size, i + size * 2];
-    if(colOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
-      colOfThree.forEach(cell => updatedBoard[cell] = "")
+    if(colOfThree.every(cell => updatedBoard[i].color === updatedBoard[cell].color)){
+      colOfThree.forEach(cell => {
+        updatedBoard[cell].color = "" 
+        updatedBoard[cell].armed = false
+        return;
+      })
       matches++;
     }
   }
@@ -31,8 +35,8 @@ const checkForRowOfThree = (gameBoard, setScore) => {
   for(let i = 0; i < lastRowStartInd; i++){
     let rowOfThree = [i, i + 1, i + 2];
     if (!isValidCol(size, i)) continue;
-    if(rowOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
-      rowOfThree.forEach(cell => updatedBoard[cell] = "")
+    if(rowOfThree.every(cell => updatedBoard[i].color === updatedBoard[cell].color)){
+      rowOfThree.forEach(cell => updatedBoard[cell].color = "")
       matches++;
     }
   }
@@ -40,23 +44,27 @@ const checkForRowOfThree = (gameBoard, setScore) => {
   return {size, board: updatedBoard};
 }
 
-const replenishTopCell = (updatedBoard, currInd) => updatedBoard[currInd] = getRandArrValue(BLOCK_COLORS);
+const replenishTopCell = (cell, size) => {
+  let replenishedCell = {...cell};
+  replenishedCell.color = getRandArrValue(BLOCK_COLORS);
+  replenishedCell.armed = armCell(size);
+  return replenishedCell;
+}
 
 const moveCellDown = (gameBoard) => {
   const {size, board} = gameBoard;
-  const updatedBoard = [...board]
+  let updatedBoard = [...board]
 
   for(let i = 0; i < size ** 2 - size; i++){
-
     //Add new random cell if top cell is empty
-    if(updatedBoard[i] === '' && i < size){
-      replenishTopCell(updatedBoard, i)
+    if(updatedBoard[i].color === '' && i < size){
+      updatedBoard[i] = replenishTopCell(updatedBoard[i], size)
     }
     
     //Move current cell down if cell below is empty
-    if(updatedBoard[i + size] === ''){
-      updatedBoard[i + size] = updatedBoard[i]
-      updatedBoard[i] = "";
+    if(updatedBoard[i + size].color === ''){
+      updatedBoard[i + size].color = updatedBoard[i].color
+      updatedBoard[i].color = "";
     }
   }
 
@@ -102,10 +110,10 @@ const swapCells = (activeCell, replacedCell, setGameBoard) => {
 const isValidMove = (boardSize, activeCellInd, replacedCellInd) => {
 
   return (isValidCellInd(boardSize, activeCellInd) && isValidCellInd(boardSize, replacedCellInd)) &&
-         (activeCellInd === replacedCellInd - 1 && replacedCellInd % boardSize !== 0) ||
+         ((activeCellInd === replacedCellInd - 1 && replacedCellInd % boardSize !== 0) ||
          (activeCellInd === replacedCellInd - boardSize) ||
          (activeCellInd === replacedCellInd + 1 && replacedCellInd % boardSize !== boardSize -1) ||
-         (activeCellInd === replacedCellInd + boardSize) 
+         (activeCellInd === replacedCellInd + boardSize)) 
 }
 
 const isValidCellInd = (boardSize, cellInd) => cellInd >= 0 && cellInd < boardSize ** 2;
