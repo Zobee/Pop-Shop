@@ -1,17 +1,20 @@
-import {BLOCK_COLORS} from '../consts'
+import {BLOCK_COLORS, BASE_SCORE} from '../consts'
 import {getRandArrValue} from './buildBoard'
 
-const checkForColOfThree = (gameBoard) => {
+const checkForColOfThree = (gameBoard, setScore) => {
   const {size, board} = gameBoard
   const updatedBoard = [...board];
   const lastColStartInd = (size ** 2) - (size * 2 + 1);
+  let matches = 0;
 
   for(let i = 0; i < lastColStartInd; i++){
     let colOfThree = [i, i + size, i + size * 2];
     if(colOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
       colOfThree.forEach(cell => updatedBoard[cell] = "")
+      matches++;
     }
   }
+  setScore(prev => prev + BASE_SCORE * matches)
   return {size, board: updatedBoard};
 }
 
@@ -19,18 +22,21 @@ const isValidCol = (boardSize, currInd) => {
   return currInd % boardSize !== boardSize - 2 && currInd % boardSize !== boardSize - 1;
 }
 
-const checkForRowOfThree = (gameBoard) => {
+const checkForRowOfThree = (gameBoard, setScore) => {
   const {size, board} = gameBoard
   const updatedBoard = [...board];
   const lastRowStartInd = (size ** 2) - 4;
+  let matches = 0;
 
   for(let i = 0; i < lastRowStartInd; i++){
     let rowOfThree = [i, i + 1, i + 2];
     if (!isValidCol(size, i)) continue;
     if(rowOfThree.every(cell => updatedBoard[i] === updatedBoard[cell])){
       rowOfThree.forEach(cell => updatedBoard[cell] = "")
+      matches++;
     }
   }
+  setScore(prev => prev + BASE_SCORE * matches)
   return {size, board: updatedBoard};
 }
 
@@ -57,9 +63,9 @@ const moveCellDown = (gameBoard) => {
   return {size, board: updatedBoard};
 }
 
-export const updateBoard = (gameBoard) => {
-  let board = checkForColOfThree(gameBoard);
-  board = checkForRowOfThree(board)
+export const updateBoard = (gameBoard, setScore) => {
+  let board = checkForColOfThree(gameBoard, setScore);
+  board = checkForRowOfThree(board, setScore)
   board = moveCellDown(board)
   return board;
 }

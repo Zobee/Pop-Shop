@@ -11,11 +11,11 @@ const Board = ({setScore}) => {
 
   useEffect(() => {
     const gameTimer = setInterval(() => {
-      let board = updateBoard(gameBoard)
+      let board = updateBoard(gameBoard, setScore)
       setGameBoard(board)
     }, 100)
     return () => clearInterval(gameTimer)
-  },[gameBoard])
+  },[gameBoard, setScore])
 
 
   return (
