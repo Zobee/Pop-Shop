@@ -4,10 +4,20 @@ import Board from "./components/Board";
 
 const App = () => {
   const [score, setScore] = useState(0)
+  const [gameOver, setGameOver] = useState(false)
   return (
     <div className='container'>
-      <Scoreboard score={score}/>
-      <Board setScore={setScore}/>
+    {gameOver ? 
+      <div>
+      Game Over
+      Final Score: {score}
+      </div>
+    :
+      <div>
+        <Scoreboard score={score}/>
+        <Board setScore={setScore} setGameOver={setGameOver}/>
+      </div>
+    }
     </div>
   );
 }

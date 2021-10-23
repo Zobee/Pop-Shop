@@ -78,11 +78,13 @@ export const updateBoard = (gameBoard, setScore) => {
   return board;
 }
 
-export const dragStart = (e, setActiveCell) => {
+export const dragStart = (e, setActiveCell, setGameOver) => {
+  if(e.target.dataset.armed === 'true') return setGameOver(true)
   setActiveCell(e.target)
 }
 
-export const dragDrop = (e, setReplacedCell) => {
+export const dragDrop = (e, setReplacedCell, setGameOver) => {
+  if(e.target.dataset.armed === 'true') return setGameOver(true)
   setReplacedCell(e.target)
 }
 
@@ -117,3 +119,7 @@ const isValidMove = (boardSize, activeCellInd, replacedCellInd) => {
 }
 
 const isValidCellInd = (boardSize, cellInd) => cellInd >= 0 && cellInd < boardSize ** 2;
+
+const gameOver = () => {
+
+}
