@@ -6,7 +6,7 @@
 - Add sounds/BGM
 - Add sprites/animation
 - Style the board/main game section
-- Add a lose condition (it's not really a fun game if it goes on forever)
+  - Make it mobile-responsive
 
 ## To-do+
 - Add a high-score table (backend integration)

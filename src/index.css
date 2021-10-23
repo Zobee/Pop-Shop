@@ -4,10 +4,13 @@
   box-sizing: border-box;
 }
 
+body{
+  background-color: black;
+}
+
 .container{
   display: flex;
   flex-direction: column;
-  padding: 30px;
   justify-content: center;
   align-items: center;
 }
@@ -23,8 +26,27 @@
   width: 80px;
   height: 80px;
   cursor: pointer;
+  box-shadow: 0.2rem 0.2rem #555;
 }
 
 .armed{
   border-radius: 50%;
+  transform: scale(0.95);
+  border: solid 4px crimson;
+}
+
+.score-board{
+  color: white;
+}
+
+.game-over{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 4rem;
+  height: 50vh;
+  width: 50vh;
+  background-color: #290029;
 }

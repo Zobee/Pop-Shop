@@ -120,6 +120,8 @@ const isValidMove = (boardSize, activeCellInd, replacedCellInd) => {
 
 const isValidCellInd = (boardSize, cellInd) => cellInd >= 0 && cellInd < boardSize ** 2;
 
-const gameOver = () => {
 
+export const restartGame = (setGameOver, setScore) => {
+  setGameOver(false)
+  setScore(0)
 }
