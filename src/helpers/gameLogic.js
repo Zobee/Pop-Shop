@@ -10,7 +10,7 @@ const checkForColOfThree = (gameBoard, setScore) => {
   for(let i = 0; i < lastColStartInd; i++){
     let colOfThree = [i, i + size, i + size * 2];
     const currColor = updatedBoard[i].color
-    if(colOfThree.every(cell => currColor === updatedBoard[cell].color)){
+    if(colOfThree.every(cell => currColor === updatedBoard[cell].color && currColor)){
       colOfThree.forEach(cell => {
         updatedBoard[cell].color = "" 
         updatedBoard[cell].armed = false
@@ -37,7 +37,7 @@ const checkForRowOfThree = (gameBoard, setScore) => {
     let rowOfThree = [i, i + 1, i + 2];
     if (!isValidCol(size, i)) continue;
     const currColor = updatedBoard[i].color
-    if(rowOfThree.every(cell => currColor === updatedBoard[cell].color)){
+    if(rowOfThree.every(cell => currColor === updatedBoard[cell].color && currColor)){
       rowOfThree.forEach(cell => updatedBoard[cell].color = "")
       matches++;
     }
