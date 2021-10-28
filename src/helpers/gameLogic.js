@@ -9,7 +9,8 @@ const checkForColOfThree = (gameBoard, setScore) => {
 
   for(let i = 0; i < lastColStartInd; i++){
     let colOfThree = [i, i + size, i + size * 2];
-    if(colOfThree.every(cell => updatedBoard[i].color === updatedBoard[cell].color)){
+    const currColor = updatedBoard[i].color
+    if(colOfThree.every(cell => currColor === updatedBoard[cell].color)){
       colOfThree.forEach(cell => {
         updatedBoard[cell].color = "" 
         updatedBoard[cell].armed = false
@@ -35,7 +36,8 @@ const checkForRowOfThree = (gameBoard, setScore) => {
   for(let i = 0; i < lastRowStartInd; i++){
     let rowOfThree = [i, i + 1, i + 2];
     if (!isValidCol(size, i)) continue;
-    if(rowOfThree.every(cell => updatedBoard[i].color === updatedBoard[cell].color)){
+    const currColor = updatedBoard[i].color
+    if(rowOfThree.every(cell => currColor === updatedBoard[cell].color)){
       rowOfThree.forEach(cell => updatedBoard[cell].color = "")
       matches++;
     }
@@ -64,7 +66,9 @@ const moveCellDown = (gameBoard) => {
     //Move current cell down if cell below is empty
     if(updatedBoard[i + size].color === ''){
       updatedBoard[i + size].color = updatedBoard[i].color
+      updatedBoard[i + size].armed = updatedBoard[i].armed
       updatedBoard[i].color = "";
+      updatedBoard[i].armed = false;
     }
   }
 
