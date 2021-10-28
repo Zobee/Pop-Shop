@@ -16,10 +16,12 @@ body{
 }
 
 .board{
-  width: 640px;
-  height: 640px;
+  width: 645px;
+  height: 645px;
   display: flex;
   flex-wrap: wrap;
+  border: 2px solid blue;
+  background: linear-gradient(90deg, #3838eb, #0d1231);
 }
 
 .board div{
@@ -37,6 +39,11 @@ body{
 
 .score-board{
   color: white;
+  margin: 0.2rem;
+  padding: 0.25rem;
+  width: 100%;
+  text-align: center;
+  background-color: black;
 }
 
 .game-over{
@@ -48,5 +55,34 @@ body{
   margin: 4rem;
   height: 50vh;
   width: 50vh;
-  background-color: #290029;
+  background-color: #B026FF;
+}
+
+.game-over button{
+  width: 12rem;
+  height: 4rem;
+  border: none;
+  background-color: #000000;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0.2rem 0.1rem #555;
+  transition: all 0.25s ease;
+}
+
+.game-over button:hover, .game-over button:focus{
+  background-color: #2A2A2A;
+  transform: translateY(0.1rem);
+  box-shadow: 0.1rem 0.05rem #222;
+}
+
+.game-display{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding-bottom: 3rem;
+  padding: 0.5rem 2rem;
+  background-color: #B026FF;
 }

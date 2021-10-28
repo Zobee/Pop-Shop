@@ -11,7 +11,7 @@ const App = () => {
     {gameOver ? 
     <Gameover score={score} setScore={setScore} setGameOver={setGameOver}/>
     :
-      <div>
+      <div className='game-display'>
         <Scoreboard score={score}/>
         <Board setScore={setScore} setGameOver={setGameOver}/>
       </div>

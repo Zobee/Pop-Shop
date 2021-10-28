@@ -13,4 +13,5 @@
 - Add extra features (combos, power-ups, etc)
   - Virtual pet sim
   - Bombs that take away HP if touched directly
+  - Each move reduces HP as well
   - Level ups depending on how many of a certain color has been collected
