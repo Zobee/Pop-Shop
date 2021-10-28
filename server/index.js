@@ -5,9 +5,8 @@ const app = express();
 
 const score = require('./routes/score')
 
-app.use(cors)
-
 app.use(express.json())
+app.use(cors())
 app.use("/scores", score)
 
 app.get('/', (req, res) => {

@@ -5,11 +5,12 @@ const Scores = () => {
   const [scores, setScores] = useState([])
   useEffect(() => {
     axios.get("http://localhost:8000/scores")
-    .then(res => console.log(res.data))
-  },[])
+    .then(res => setScores(res.data))
+    .catch(err => console.log(err))
+  }, [])
   return (
     <div>
-      Ball
+      {console.log(scores)}
     </div>
   )
 }

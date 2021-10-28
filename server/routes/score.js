@@ -7,9 +7,9 @@ Router.get("/", (req, res) => {
 })
 
 Router.post("/", (req, res) => {
-  const {user, score} = req.body
+  const {player, score} = req.body
   try {
-    scores.push({user: score})
+    scores.push({player, score})
     res.send("Score Saved")
   } catch(err) {
     console.log(err)
