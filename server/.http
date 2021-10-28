@@ -1,7 +1,0 @@
-POST http://localhost:8000/scores HTTP/1.1
-content-type: application/json
-
-{
-  "user": "Bell Bottom",
-  "score": 13805
-}

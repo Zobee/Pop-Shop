@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Scoreboard from "./components/Scoreboard";
 import Board from "./components/Board";
+import Scores from "./components/Scores";
 import Gameover from "./components/Gameover";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <div className='game-display'>
         <Scoreboard score={score}/>
         <Board setScore={setScore} setGameOver={setGameOver}/>
+        <Scores />
       </div>
     }
     </div>

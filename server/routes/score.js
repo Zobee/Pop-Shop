@@ -1,8 +1,6 @@
 const Router = require('express').Router()
 
-const scores = {
-  
-}
+const scores = [];
 
 Router.get("/", (req, res) => {
   res.json(scores);
@@ -11,7 +9,7 @@ Router.get("/", (req, res) => {
 Router.post("/", (req, res) => {
   const {user, score} = req.body
   try {
-    scores[user] = score;
+    scores.push({user: score})
     res.send("Score Saved")
   } catch(err) {
     console.log(err)
